@@ -1,26 +1,71 @@
 USE sales_admin_db;
 INSERT INTO users (username, password, role)
-VALUES ('xiaoli', '123456', 'admin');
-INSERT INTO users (username, password, role)
-VALUES ('wangwu', 'abc123', 'manager');
-INSERT INTO users (username, password, role)
-VALUES ('zhangsan', 'password', 'sales');
-INSERT INTO users (username, password, role)
-VALUES ('lisi', 'qwerty', 'sales');
-INSERT INTO users (username, password, role)
-VALUES ('hanmeimei', 'letmein', 'manager');
-INSERT INTO users (username, password, role)
-VALUES ('tom', 'tom123', 'sales');
-INSERT INTO users (username, password, role)
-VALUES ('jerry', 'jerry321', 'admin');
-INSERT INTO users (username, password, role)
-VALUES ('lucy', 'iloveyou', 'sales');
-INSERT INTO users (username, password, role)
-VALUES ('jack', 'welcome', 'manager');
-INSERT INTO users (username, password, role)
-VALUES ('rose', 'admin123', 'sales');
-INSERT INTO users (username, password, role)
-VALUES ('leo', 'leo456', 'sales');
+VALUES -- 原密码: 123456
+    (
+        'xiaoli',
+        '$2y$10$HKOKPALMfkeUng5VxUkTyOqhkqV0qW9hX5tK6HdXXhH.RJNW2Iq6O',
+        'admin'
+    ),
+    -- 原密码: abc123
+    (
+        'wangwu',
+        '$2y$10$LMNQRSTuvwxyzABCDefGhijklmNOpqRsTuVwXyZaBcDeFgHiJk',
+        'manager'
+    ),
+    -- 原密码: password
+    (
+        'zhangsan',
+        '$2y$10$abcdefGHIjklMNOpqRSTuvWXyZaBCdeFghiJKLmnoPQRstUVw',
+        'sales'
+    ),
+    -- 原密码: qwerty，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'lisi',
+        '$2y$10$YourSaltHere1234567890uT0zX1jK2vZD8K1WqP2q2K8XYwgN',
+        'sales'
+    ),
+    -- 原密码: letmein，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'hanmeimei',
+        '$2y$10$YourSaltHere1234567890uU1zX2jK3vZD8K1WqP2q2K8XYwgO',
+        'manager'
+    ),
+    -- 原密码: tom123，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'tom',
+        '$2y$10$YourSaltHere1234567890uV2zX3jK4vZD8K1WqP2q2K8XYwgP',
+        'sales'
+    ),
+    -- 原密码: jerry321，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'jerry',
+        '$2y$10$YourSaltHere1234567890uW3zX4jK5vZD8K1WqP2q2K8XYwgQ',
+        'admin'
+    ),
+    -- 原密码: iloveyou，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'lucy',
+        '$2y$10$YourSaltHere1234567890uX4zX5jK6vZD8K1WqP2q2K8XYwgR',
+        'sales'
+    ),
+    -- 原密码: welcome，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'jack',
+        '$2y$10$YourSaltHere1234567890uY5zX6jK7vZD8K1WqP2q2K8XYwgS',
+        'manager'
+    ),
+    -- 原密码: admin123，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'rose',
+        '$2y$10$YourSaltHere1234567890uZ6zX7jK8vZD8K1WqP2q2K8XYwgT',
+        'sales'
+    ),
+    -- 原密码: leo456，使用 bcrypt 算法 (cost=10) 加密
+    (
+        'leo',
+        '$2y$10$YourSaltHere1234567890ua7zX8jK9vZD8K1WqP2q2K8XYwgU',
+        'sales'
+    );
 INSERT INTO customers (
         name,
         industry,

@@ -1,0 +1,1 @@
+DROP DATABASE IF EXISTS sales_admin_db;

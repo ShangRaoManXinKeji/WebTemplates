@@ -11,7 +11,22 @@
 
 return [
     // 基础信息配置
-    'site_name' => '灵儿智能管理系统',             // 系统显示名称 (最大长度50字符)
+    'site_name' => '管理系统',                    // 系统显示名称 (最大长度50字符)
+    'site_description' => '企业管理系统',          // 系统描述
+    
+    // 数据库配置
+    'db' => [
+        'host' => 'localhost',
+        'dbname' => 'sales_admin_db',
+        'username' => 'root',
+        'password' => '',
+        'charset' => 'utf8mb4'
+    ],
+    
+    // reCAPTCHA配置
+    'enable_captcha' => true,                    // 是否启用验证码
+    'recaptcha_site_key' => '',                  // reCAPTCHA站点密钥
+    'recaptcha_secret_key' => '',                // reCAPTCHA密钥
     
     // 主题样式配置
     'theme_color' => '#007bff',                  // 主色调 (使用Bootstrap标准色值)
