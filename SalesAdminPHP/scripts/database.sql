@@ -70,3 +70,26 @@ CREATE TABLE IF NOT EXISTS kpi_metrics (
     unit VARCHAR(20) COMMENT '计量单位(如: 元, 个)',
     collected_at DATE NOT NULL COMMENT '统计日期'
 ) COMMENT = '关键绩效指标记录表';
+-- 登录尝试记录表
+CREATE TABLE IF NOT EXISTS login_attempts (
+    id INT AUTO_INCREMENT PRIMARY KEY COMMENT '记录ID',
+    username VARCHAR(100) NOT NULL COMMENT '尝试登录的用户名',
+    attempt_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '尝试时间',
+    ip_address VARCHAR(45) NOT NULL COMMENT 'IP地址',
+    INDEX idx_username_time (username, attempt_time)
+) COMMENT = '登录尝试记录表(用于限制登录失败次数)';
+-- 添加 users 表中缺少的字段
+ALTER TABLE users
+ADD COLUMN status TINYINT(1) DEFAULT 1 COMMENT '账户状态: 1-启用, 0-禁用',
+    ADD COLUMN last_login TIMESTAMP NULL COMMENT '最后登录时间',
+    ADD COLUMN login_count INT DEFAULT 0 COMMENT '登录次数';
+CREATE TABLE operating_costs (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    cost_type VARCHAR(50) NOT NULL COMMENT '成本类型',
+    amount DECIMAL(15, 2) NOT NULL COMMENT '金额',
+    description TEXT COMMENT '详细说明',
+    occurred_at DATETIME NOT NULL COMMENT '发生时间',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_occurred_at (occurred_at)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COMMENT = '运营成本表';

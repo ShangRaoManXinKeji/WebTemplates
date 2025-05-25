@@ -1,35 +1,31 @@
 <?php
-/**
- * 入口文件 - 负责初始化会话和用户认证
- * @author Your Sister
- * @version 1.0.0
- */
-
-// 初始化安全会话
 session_start();
-session_regenerate_id(true); // 防止会话固定攻击
 
 // 设置安全响应头
-header('X-Frame-Options: DENY'); // 防止点击劫持
-header('X-Content-Type-Options: nosniff'); // 防止MIME类型嗅探
-header('X-XSS-Protection: 1; mode=block'); // 启用XSS过滤
+header('X-Frame-Options: DENY');
+header('X-Content-Type-Options: nosniff');
+header('X-XSS-Protection: 1; mode=block');
 
-// 安全检查流程
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_status'])) {
-    // 用户未登录，记录访问日志
-    error_log("未授权访问尝试: " . $_SERVER['REMOTE_ADDR']);
-    
-    // 重定向到登录页面
+// 检查登录状态
+if (!isset($_SESSION['user_id'])) {
     header('Location: ./public/login.php');
     exit();
+} else {
+    header('Location: ./public/dashboard.php');
 }
 
-// 验证用户状态
-if ($_SESSION['user_status'] !== 'active') {
+// 加载配置
+$config = require __DIR__ . '/src/config/config.php';
+
+// 检查会话超时
+if (time() - $_SESSION['last_activity'] > $config['session_lifetime']) {
     session_destroy();
-    header('Location: ./public/login.php?error=inactive');
+    header('Location: ./public/login.php?error=timeout');
     exit();
 }
+
+// 更新最后活动时间
+$_SESSION['last_activity'] = time();
 
 // 继续加载应用程序
 require_once __DIR__ . '/src/config/config.php';
